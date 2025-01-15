@@ -511,8 +511,8 @@ def main():
 
             # Clear and input the value
             total_credits_input.clear()
-            total_credits_input.send_keys("14")  # Enter custom limit
-            print("Set Total Credits to 14.")
+            total_credits_input.send_keys("2")  # Enter custom limit
+            print("Set Total Credits to 2.")
             random_delay(1, 2)
 
             # Correct the XPath by combining the conditions properly
@@ -527,59 +527,59 @@ def main():
             print("Clicked 'Save Changes' button.")
             random_delay(2, 4)
 
-            # while True: 
-            #     try:
-            #         status_element = WebDriverWait(driver, 10).until(
-            #             EC.presence_of_element_located((By.XPATH, "//td/span[contains(@id, 'status')]"))
-            #         )
+            while True: 
+                try:
+                    status_element = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.XPATH, "//td/span[contains(@id, 'status')]"))
+                    )
 
-            #         status_text = status_element.text.strip()
-            #         print(f"Status found: {status_text}")
+                    status_text = status_element.text.strip()
+                    print(f"Status found: {status_text}")
 
-            #         if status_text.lower() in ["exhausted", "limited"]:
-            #             print(f"Status is '{status_text}'. Processing...")
+                    if status_text.lower() in ["exhausted", "limited"]:
+                        print(f"Status is '{status_text}'. Processing...")
 
-            #             # Check if there's a "credit limit" link for transitioning to Exhausted
-            #             try:
-            #                 credit_limit_link = status_element.find_element(By.XPATH, "./following-sibling::a[contains(@id, 'credit_limit')]")
-            #                 driver.execute_script("arguments[0].click();", credit_limit_link)
-            #                 print("Clicked 'Credit Limit' link to transition to 'Exhausted'.")
-            #                 random_delay(2, 4)
-            #             except:
-            #                 print("No 'Credit Limit' link found; continuing to archive if already 'Exhausted'.")
+                        # Check if there's a "credit limit" link for transitioning to Exhausted
+                        try:
+                            credit_limit_link = status_element.find_element(By.XPATH, "./following-sibling::a[contains(@id, 'credit_limit')]")
+                            driver.execute_script("arguments[0].click();", credit_limit_link)
+                            print("Clicked 'Credit Limit' link to transition to 'Exhausted'.")
+                            random_delay(2, 4)
+                        except:
+                            print("No 'Credit Limit' link found; continuing to archive if already 'Exhausted'.")
 
-            #             # Locate the parent <td> and proceed with archiving
-            #             parent_td = status_element.find_element(By.XPATH, "./parent::td")
-            #             archive_button = parent_td.find_element(By.XPATH, ".//following-sibling::td/a[contains(@onclick, 'archivelink')]")
+                        # Locate the parent <td> and proceed with archiving
+                        parent_td = status_element.find_element(By.XPATH, "./parent::td")
+                        archive_button = parent_td.find_element(By.XPATH, ".//following-sibling::td/a[contains(@onclick, 'archivelink')]")
 
-            #             driver.execute_script("arguments[0].click();", archive_button)
-            #             print("Clicked 'Archive' button.")
+                        driver.execute_script("arguments[0].click();", archive_button)
+                        print("Clicked 'Archive' button.")
 
-            #             # Refresh and locate the delete button
-            #             driver.refresh()
-            #             delete_button = WebDriverWait(driver, 10).until(
-            #                 EC.element_to_be_clickable(
-            #                     (
-            #                         By.XPATH,
-            #                         "//a[contains(@onclick, 'deletelink') and contains(@title, 'Click here to delete')]",
-            #                     )
-            #                 )
-            #             )
-            #             driver.execute_script("arguments[0].click();", delete_button)
-            #             print("Clicked 'Delete' button.")
-            #             break 
+                        # Refresh and locate the delete button
+                        driver.refresh()
+                        delete_button = WebDriverWait(driver, 10).until(
+                            EC.element_to_be_clickable(
+                                (
+                                    By.XPATH,
+                                    "//a[contains(@onclick, 'deletelink') and contains(@title, 'Click here to delete')]",
+                                )
+                            )
+                        )
+                        driver.execute_script("arguments[0].click();", delete_button)
+                        print("Clicked 'Delete' button.")
+                        break 
 
-            #         else:
-            #             print(f"Status is '{status_text}' and not ready for processing. Retrying...")
-            #             driver.refresh()
-            #             random_delay(5, 10)
+                    else:
+                        print(f"Status is '{status_text}' and not ready for processing. Retrying...")
+                        driver.refresh()
+                        random_delay(5, 10)
 
-            #     except Exception as e:
-            #         print(f"Error occurred: {e}")
-            #         random_delay(5, 10)
-            #         driver.refresh()
+                except Exception as e:
+                    print(f"Error occurred: {e}")
+                    random_delay(5, 10)
+                    driver.refresh()
 
-            #     driver.refresh()
+                driver.refresh()
 
         
         finally:
