@@ -4,6 +4,7 @@ import os
 
 load_dotenv()
 
+# load env variables
 access_token:str = os.getenv("ACCESS_TOKEN")
 page_id:str = os.getenv("PAGE_ID")  # ! This is for the watches page
 base_url = f'https://graph.facebook.com/{page_id}/posts?access_token={access_token}'
